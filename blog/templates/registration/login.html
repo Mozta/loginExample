@@ -1,0 +1,18 @@
+<!-- login.html -->
+{% extends "base.html" %}
+{% block title %}Iniciar sesión{% endblock %}
+{% block head %}Iniciar sesión{% endblock %}
+{% block content %}
+    {% if form.errors %}
+        <p>Tu usuario y contraseña no coinciden. Vuelve a intentarlo.</p>
+    {% endif %}
+
+    <form class="form" method="post" action="." >{% csrf_token %}
+        <input type="text" placeholder="Usuario" name="username">
+        <input type="password" placeholder="Contraseña" name="password">
+        <button type="submit"  value="Login" id="login-button">Iniciar</button>
+        <button type="button" onclick="window.location.href='/register/' ">Registro</button>
+        <input type="hidden" name="next" value="/home" />
+    </form>
+
+{% endblock %}

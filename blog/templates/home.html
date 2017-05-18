@@ -1,0 +1,117 @@
+<!-- home.html -->
+
+{% extends "base.html" %} {% load staticfiles %} {% block title %}Bienvenido a Django{% endblock %} {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css '%}" {% endblock %} {% block content %} <h1> Bienvenido {{ user.username }} </h1>
+{% if user.username == "usuario1" %}
+<br>
+<h2>Esta es tu proyección personal:</h2>
+<br>
+<hr>
+<table style="width:100%">
+    <tr>
+        <th>NRC</th>
+        <th>Materia</th>
+        <th>Profesor</th>
+        <th>Horario</th>
+    </tr>
+    <tr>
+        <td>25684</td>
+        <td>Redes Inalambricas</td>
+        <td>Olmos Pineda</td>
+        <td>1100-­1259</td>
+    </tr>
+    <tr>
+        <td>25718</td>
+        <td>Arquitectura de computadoras</td>
+        <td>Hernandez Ameca</td>
+        <td>1700­-1859</td>
+    </tr>
+</table>
+<hr> {% endif %} {% if user.username == "usuario2" %}
+<br>
+<h2>Esta es tu proyección personal:</h2>
+<br>
+<hr>
+<table style="width:100%">
+    <tr>
+        <th>NRC</th>
+        <th>Materia</th>
+        <th>Profesor</th>
+        <th>Horario</th>
+    </tr>
+    <tr>
+        <td>25721</td>
+        <td>Microprocesadores e Interfaces</td>
+        <td>Hernandez Ameca</td>
+        <td>1700­-1859</td>
+    </tr>
+    <tr>
+        <td>25727</td>
+        <td>Proyectos I + D II</td>
+        <td>Gonzalez Calleros</td>
+        <td>0700­-0859</td>
+    </tr>
+    <tr>
+        <td>25749</td>
+        <td>Intercomunicación y seguirdad en redes</td>
+        <td>Tamariz Flores</td>
+        <td>1300­-1459</td>
+    </tr>
+</table>
+<hr> {% endif %} {% if user.username == "usuario3" %}
+<br>
+<h2>Esta es tu proyección personal:</h2>
+<br>
+<hr>
+<h2>NO CUENTAS CON PROYECCIÓN</h2> {% endif %} {% if user.username == "usuario4" %}
+<br>
+<h2>Esta es tu proyección personal:</h2>
+<br>
+<hr>
+<table style="width:100%">
+    <tr>
+        <th>NRC</th>
+        <th>Materia</th>
+        <th>Profesor</th>
+        <th>Horario</th>
+    </tr>
+    <tr>
+        <td>20123</td>
+        <td>Desarrollo de aplicaciones moviles</td>
+        <td>Paredes Juarez</td>
+        <td>1500­-1659</td>
+    </tr>
+    <tr>
+        <td>25718</td>
+        <td>Arquitectura de computadoras</td>
+        <td>Hernandez Ameca</td>
+        <td>1700­-1859</td>
+    </tr>
+    <tr>
+        <td>25759</td>
+        <td>Tratamiento de información</td>
+        <td>Pinto Avendano</td>
+        <td>0900­-1059</td>
+    </tr>
+</table>
+<hr> {% endif %} {% if user.username == "usuario5" %}
+<h2>Esta es tu proyección personal:</h2>
+<br>
+<hr>
+<table style="width:100%">
+    <tr>
+        <th>NRC</th>
+        <th>Materia</th>
+        <th>Profesor</th>
+        <th>Horario</th>
+    </tr>
+    <tr>
+        <td>25759</td>
+        <td>Tratamiento de información</td>
+        <td>Pinto Avendano</td>
+        <td>0900­-1059</td>
+    </tr>
+</table>
+<hr> {% endif %}
+<br>
+<button type="button" onclick="window.location.href='/logout/' ">Cerrar sesión</button> {% endblock %}
