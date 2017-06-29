@@ -23,3 +23,7 @@ class RegistrationForm(forms.Form):
             if self.cleaned_data['password1'] != self.cleaned_data['password2']:
                 raise forms.ValidationError(_("Las contrasenas no coinciden."))
         return self.cleaned_data
+
+class ListaF(forms.Form):
+    
+    avance = forms.DecimalField(max_digits=3, decimal_places=1)

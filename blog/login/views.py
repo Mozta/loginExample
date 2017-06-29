@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
 from .models import Lista
+from .forms import ListaF
 
 @csrf_protect
 def register(request):
@@ -48,7 +49,26 @@ def home(request):
     nombre = request.user.last_name + " " + request.user.first_name
     #latest_list = Lista.objects.order_by('-matricula')[:5]
     latest_list = Lista.objects.filter(tutor=nombre)
+
+    if request.method == 'POST':
+        print "si es POST"
+        form = ListaF(request.POST)
+        if form.is_valid():
+            print form.cleaned_data
+
+            avance=form.cleaned_data['avance']
+            #obj = Lista.objects.create(matricula=matricula, nombre=nombre, ult_periodo=ult_periodo, tutor=tutor, avance=avance)
+            obj = Lista.objects.filter(matricula=201222957).update(avance=avance)
+
+            return HttpResponseRedirect('.')
+    else:
+        print "es GET"
+        form = ListaF()
+    variables = RequestContext(request, {
+    'user': request.user, 'latest_list': latest_list, 'form': form
+    })
+
     return render_to_response(
     'home.html',
-    { 'user': request.user, 'latest_list': latest_list}
+    variables,
     )
