@@ -1,42 +1,42 @@
 <!-- home.html -->
 
-{% extends "base.html" %}
-{% load staticfiles %}
-{% block title %}Bienvenido a Django{% endblock %}
-{% block head %}
+{% extends "base.html" %} {% load staticfiles %} {% block title %}Bienvenido a Django{% endblock %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/home.css '%}" {% endblock %} {% block content %} <h1> Bienvenido {{ user.username }} </h1>
 <br>
 <h2>Esta es tu lista personal:</h2>
 <br>
-<form method="post" action="." >
-{% csrf_token %}
-<hr> {% if latest_list %}
-<table style="width:100%">
-    <tr>
-        <th>Id</th>
-        <th>Matricula</th>
-        <th>Nombre</th>
-        <th>Ult_periodo</th>
-        <th>Avance</th>
-    </tr>
-    {% for fila in latest_list %}
-    <tr>
-        <td>{{fila.id}}</td>
-        <td>{{fila.matricula}}</td>
-        <td>{{fila.nombre}}</td>
-        <td>{{fila.ult_periodo}}</td>
-        <!--<td>{{fila.avance}}</td>-->
-        <td>
-          <input id="your_name" type="text" name="your_name" value={{fila.avance}} required />
-          {{ form.avance }}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-{% else %}
-<p>No hay datos disponibles.</p>
-{% endif %}
-<input type="submit" value="guardalos">
+<form method="post" action=".">
+    {% csrf_token %}
+    <hr> {% if latest_list %}
+    <table style="width:100%">
+        <tr>
+            <th>Id</th>
+            <th>Matricula</th>
+            <th>Nombre</th>
+            <th>Ult_periodo</th>
+            <th>Avance</th>
+        </tr>
+        {% for fila in latest_list %}
+        <tr>
+            <td>{{fila.id}}</td>
+            <td>{{fila.matricula}}</td>
+            <td>{{fila.nombre}}</td>
+            <td>{{fila.ult_periodo}}</td>
+            <td>{{fila.avance}}</td>
+            <td><input id={{fila.id}} type="text" name="your_name" value={{fila.avance}}  /></td>
+            <td>
+              <input type="submit" value="Modificar" id={{fila.id}}>
+              <!--<button type="button" onclick="window.location.href='/modify/' " id={{fila.id}}>Modificar</button>
+                <input id={{fila.id}} type="text" name="your_name" value={{fila.avance}}  />
+                {{ form.avance }}-->
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <input type="submit" value="guardalos">
+    {% else %}
+    <p>No hay datos disponibles.</p>
+    {% endif %}
 </form>
 <hr>
 <br>

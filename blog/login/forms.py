@@ -25,5 +25,15 @@ class RegistrationForm(forms.Form):
         return self.cleaned_data
 
 class ListaF(forms.Form):
-    
+    matricula = forms.IntegerField()
+    nombre = forms.CharField(max_length=200)
+    ult_periodo = forms.CharField(max_length=200)
+    tutor = forms.CharField(max_length=200)
+    avance = forms.DecimalField(max_digits=3, decimal_places=1)
+
+class ModifyF(forms.Form):
+    matricula = forms.IntegerField()
+    nombre = forms.CharField(max_length=200)
+    ult_periodo = forms.CharField(max_length=200)
+    tutor = forms.CharField(max_length=200)
     avance = forms.DecimalField(max_digits=3, decimal_places=1)

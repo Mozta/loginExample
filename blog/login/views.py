@@ -12,6 +12,7 @@ from django.template import RequestContext
 
 from .models import Lista
 from .forms import ListaF
+from .forms import ModifyF
 
 @csrf_protect
 def register(request):
@@ -44,26 +45,45 @@ def logout_page(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+def modify(request):
+    if request.method == 'POST':
+        form = ModifyF(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+            username=form.cleaned_data['username'],
+            password=form.cleaned_data['password1'],
+            email=form.cleaned_data['email']
+            )
+            return HttpResponseRedirect('/home/')
+    else:
+        form = ModifyF()
+        #print form
+    print request
+    variables = RequestContext(request, {
+    'form': form
+    })
+
+    return render_to_response(
+    'modify.html',
+    variables,
+    )
+
 @login_required
 def home(request):
     nombre = request.user.last_name + " " + request.user.first_name
     #latest_list = Lista.objects.order_by('-matricula')[:5]
     latest_list = Lista.objects.filter(tutor=nombre)
 
-    if request.method == 'POST':
-        print "si es POST"
-        form = ListaF(request.POST)
-        if form.is_valid():
-            print form.cleaned_data
+    obj = Lista.objects.filter(id=1)#.update(avance=55.3)
+    #print "afuera"
+    #print request
 
-            avance=form.cleaned_data['avance']
-            #obj = Lista.objects.create(matricula=matricula, nombre=nombre, ult_periodo=ult_periodo, tutor=tutor, avance=avance)
-            obj = Lista.objects.filter(matricula=201222957).update(avance=avance)
-
-            return HttpResponseRedirect('.')
-    else:
-        print "es GET"
-        form = ListaF()
+        #print "es GET"
+    form = ListaF()
+        #form = latest_list
+        #print form.is_bound
+        #print form
+        #f = CommentForm(initial={'name': 'instance'}, auto_id=False)
     variables = RequestContext(request, {
     'user': request.user, 'latest_list': latest_list, 'form': form
     })
